@@ -2,6 +2,7 @@ package quru.qa.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import quru.qa.pages.components.CalendarComponent;
+import quru.qa.pages.components.ResultsTableComponent;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -11,11 +12,13 @@ public class RegistrationFormPages {
     //Elements
 
     private CalendarComponent calendarComponent = new CalendarComponent();
+    private ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
     private SelenideElement firstNameInput = $("#firstName"),
             lastName = $("#lastName"),
             email = $("#userEmail"),
             gender = $("#genterWrapper"),
-            number = $("#userNumber");
+            number = $("#userNumber"),
+            hobbies = $("#subjectsInput");
 
     // Actions
     public RegistrationFormPages openPage() {
@@ -56,6 +59,16 @@ public class RegistrationFormPages {
     public RegistrationFormPages setBirthDate(String day, String month, String year) {
         $("#dateOfBirthInput").click();
         calendarComponent.setDate(day, month, year);
+        return this;
+    }
+
+    public RegistrationFormPages setHobbies(String value) {
+        hobbies.setValue(value).pressEnter();
+        return this;
+    }
+
+    public RegistrationFormPages checkResult(String sample){
+        resultsTableComponent.checkResult(sample);
         return this;
     }
 

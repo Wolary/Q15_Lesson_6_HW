@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import quru.qa.pages.RegistrationFormPages;
+import quru.qa.pages.components.ResultsTableComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -34,8 +35,8 @@ public class FormTestWithPageObjects {
                 .setEmail(email)
                 .setGender(gender)
                 .setNumber(number)
-                .setBirthDate(day, month, year);
-        $("#subjectsInput").setValue(hobbies).pressEnter();
+                .setBirthDate(day, month, year)
+                .setHobbies(hobbies);
         $(byText("Reading")).click();
         $("#uploadPicture").uploadFromClasspath("joka.jpg");
         $("#currentAddress").setValue("Russia, Krasnodar, Krasnaya 5.");
@@ -45,16 +46,16 @@ public class FormTestWithPageObjects {
         $("#submit").click();
 
 //проверяем ввод
-        $(".table-responsive").shouldHave(text(firstName + " " + lastName),
-                text(email),
-                text(gender),
-                text(number),
-                text(day + " " + month + "," + year),
-                text("Arts"),
-                text("Reading"),
-                text("Joka.jpg"),
-                text("Russia, Krasnodar, Krasnaya 5."),
-                text("NCR Gurgaon"));
+        registrationFormPages.checkResult(firstName + " " + lastName)
+                .checkResult(email)
+                .checkResult(gender)
+                .checkResult(number)
+                .checkResult(day + " " + month + "," + year)
+                .checkResult("Arts")
+                .checkResult("Reading")
+                .checkResult("Joka.jpg")
+                .checkResult("Russia, Krasnodar, Krasnaya 5.")
+                .checkResult("NCR Gurgaon");
     }
     @Test
     void fillFormMinimumTest() {

@@ -73,8 +73,8 @@ public class FormTestWithPageObjects {
                 .submitForm();
 
 //проверяем ввод
-        $(".table-responsive").shouldHave(text(firstName + " " + lastName),
-                text(gender),
-                text(number));
+        registrationFormPages.checkResult(firstName + " " + lastName)
+                .checkResult(gender)
+                .checkResult(number);
     }
 }

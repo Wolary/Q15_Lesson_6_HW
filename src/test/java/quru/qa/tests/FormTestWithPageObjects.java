@@ -4,11 +4,6 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import quru.qa.pages.RegistrationFormPages;
-import quru.qa.pages.components.ResultsTableComponent;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 
 public class FormTestWithPageObjects {
     RegistrationFormPages registrationFormPages = new RegistrationFormPages();
@@ -19,7 +14,7 @@ public class FormTestWithPageObjects {
             number = "1234567890",
             subjects = "arts",
             hobbies = "Reading",
-            address = "Russia, Krasnodar, Krasnaya 5.",
+            address = "Russia, Krasnodar, Krasnaya 5",
             picture = "joka.jpg",
             state = "NCR",
             city = "Noida",

@@ -15,40 +15,41 @@ public class FormTestWithPageObjects {
             lastName = "Ivanov",
             email = "ivan@ya.ru",
             gender = "Other",
-            number = "1234567890";
+            number = "1234567890",
+            hobbies = "arts",
+            day = "16", month = "April", year = "1982";
 
     @BeforeAll
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
-    //  Configuration.holdBrowserOpen = true;
+     // Configuration.holdBrowserOpen = true;
     }
 
     @Test
     void fillForm() {
-        registrationFormPages.openPage();
-        registrationFormPages.setFirstName(firstName);
-        registrationFormPages.setFirstName(firstName);
-        registrationFormPages.setGender(gender);
-        registrationFormPages.setNumber(number);
-        $("#dateOfBirthInput").click();
-            $(".react-datepicker__month-select").selectOptionByValue("4");
-            $(".react-datepicker__year-select").selectOptionByValue("1982");
-            $(".react-datepicker__day.react-datepicker__day--016").click();
-        $("#subjectsInput").setValue("arts").pressEnter();
+        registrationFormPages.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .setGender(gender)
+                .setNumber(number)
+                .setBirthDate(day, month, year);
+        $("#subjectsInput").setValue(hobbies).pressEnter();
         $(byText("Reading")).click();
         $("#uploadPicture").uploadFromClasspath("joka.jpg");
         $("#currentAddress").setValue("Russia, Krasnodar, Krasnaya 5.");
         $("#react-select-3-input").setValue("ncr").pressEnter();
         $("#react-select-4-input").setValue("gurgaon").pressEnter();
+
         $("#submit").click();
 
 //проверяем ввод
-        $(".table-responsive").shouldHave(text(firstName + lastName),
+        $(".table-responsive").shouldHave(text(firstName + " " + lastName),
                 text(email),
                 text(gender),
                 text(number),
-                text("16 May,1982"),
+                text(day + " " + month + "," + year),
                 text("Arts"),
                 text("Reading"),
                 text("Joka.jpg"),

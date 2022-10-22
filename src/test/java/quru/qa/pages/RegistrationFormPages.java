@@ -1,6 +1,7 @@
 package quru.qa.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import quru.qa.pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -8,10 +9,13 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationFormPages {
 
     //Elements
+
+    private CalendarComponent calendarComponent = new CalendarComponent();
     private SelenideElement firstNameInput = $("#firstName"),
-                    lastName = $("#lastName"),
-                    gender = $("#genterWrapper"),
-                    number = $("#userNumber");
+            lastName = $("#lastName"),
+            email = $("#userEmail"),
+            gender = $("#genterWrapper"),
+            number = $("#userNumber");
 
     // Actions
     public RegistrationFormPages openPage() {
@@ -22,29 +26,37 @@ public class RegistrationFormPages {
         return this;
     }
 
-    public RegistrationFormPages setFirstName(String value){
+    public RegistrationFormPages setFirstName(String value) {
         firstNameInput.setValue(value);
         return this;
-
     }
 
-    public RegistrationFormPages setLastName(String value){
+    public RegistrationFormPages setEmail(String value) {
+        email.setValue(value);
+        return this;
+    }
+
+    public RegistrationFormPages setLastName(String value) {
         lastName.setValue(value);
         return this;
-
     }
 
-    public RegistrationFormPages setGender(String value){
+    public RegistrationFormPages setGender(String value) {
         gender.$(byText(value)).click();
         return this;
 
 
     }
 
-    public RegistrationFormPages setNumber(String value){
+    public RegistrationFormPages setNumber(String value) {
         number.setValue(value);
         return this;
+    }
 
+    public RegistrationFormPages setBirthDate(String day, String month, String year) {
+        $("#dateOfBirthInput").click();
+        calendarComponent.setDate(day, month, year);
+        return this;
     }
 
 

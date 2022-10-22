@@ -17,14 +17,19 @@ public class FormTestWithPageObjects {
             email = "ivan@ya.ru",
             gender = "Other",
             number = "1234567890",
-            hobbies = "arts",
+            subjects = "arts",
+            hobbies = "Reading",
+            address = "Russia, Krasnodar, Krasnaya 5.",
+            picture = "joka.jpg",
+            state = "NCR",
+            city = "Noida",
             day = "16", month = "April", year = "1982";
 
     @BeforeAll
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
-     // Configuration.holdBrowserOpen = true;
+        // Configuration.holdBrowserOpen = true;
     }
 
     @Test
@@ -36,14 +41,13 @@ public class FormTestWithPageObjects {
                 .setGender(gender)
                 .setNumber(number)
                 .setBirthDate(day, month, year)
-                .setHobbies(hobbies);
-        $(byText("Reading")).click();
-        $("#uploadPicture").uploadFromClasspath("joka.jpg");
-        $("#currentAddress").setValue("Russia, Krasnodar, Krasnaya 5.");
-        $("#react-select-3-input").setValue("ncr").pressEnter();
-        $("#react-select-4-input").setValue("gurgaon").pressEnter();
-
-        $("#submit").click();
+                .setSubjects(subjects)
+                .setHobbies(hobbies)
+                .setPicture(picture)
+                .setAddress(address)
+                .checkState(state)
+                .checkCity(city)
+                .submitForm();
 
 //проверяем ввод
         registrationFormPages.checkResult(firstName + " " + lastName)
@@ -51,12 +55,13 @@ public class FormTestWithPageObjects {
                 .checkResult(gender)
                 .checkResult(number)
                 .checkResult(day + " " + month + "," + year)
-                .checkResult("Arts")
-                .checkResult("Reading")
-                .checkResult("Joka.jpg")
-                .checkResult("Russia, Krasnodar, Krasnaya 5.")
-                .checkResult("NCR Gurgaon");
+                .checkResult(subjects)
+                .checkResult(hobbies)
+                .checkResult(picture)
+                .checkResult(address)
+                .checkResult(state + " " + city);
     }
+
     @Test
     void fillFormMinimumTest() {
 
@@ -64,8 +69,8 @@ public class FormTestWithPageObjects {
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setGender(gender)
-                .setNumber(number);
-        $("#submit").click();
+                .setNumber(number)
+                .submitForm();
 
 //проверяем ввод
         $(".table-responsive").shouldHave(text(firstName + " " + lastName),

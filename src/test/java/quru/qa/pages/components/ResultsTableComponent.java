@@ -5,7 +5,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ResultsTableComponent {
 
-    public ResultsTableComponent checkResult(String sample){
+    public ResultsTableComponent checkResult(String sample) {
         $(".table-responsive").shouldHave(text(sample));
         return this;
     }

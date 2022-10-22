@@ -18,7 +18,13 @@ public class RegistrationFormPages {
             email = $("#userEmail"),
             gender = $("#genterWrapper"),
             number = $("#userNumber"),
-            hobbies = $("#subjectsInput");
+            subjects = $("#subjectsInput"),
+            hobbies = $(byText("Reading")),
+            picture = $("#uploadPicture"),
+            address = $("#currentAddress"),
+            state = $("#react-select-3-input"),
+            city = $("#react-select-4-input"),
+            submit = $("#submit");
 
     // Actions
     public RegistrationFormPages openPage() {
@@ -47,8 +53,6 @@ public class RegistrationFormPages {
     public RegistrationFormPages setGender(String value) {
         gender.$(byText(value)).click();
         return this;
-
-
     }
 
     public RegistrationFormPages setNumber(String value) {
@@ -62,12 +66,42 @@ public class RegistrationFormPages {
         return this;
     }
 
-    public RegistrationFormPages setHobbies(String value) {
-        hobbies.setValue(value).pressEnter();
+    public RegistrationFormPages setSubjects(String value) {
+        subjects.setValue(value).pressEnter();
         return this;
     }
 
-    public RegistrationFormPages checkResult(String sample){
+    public RegistrationFormPages setHobbies(String value) {
+        hobbies.click();
+        return this;
+    }
+
+    public RegistrationFormPages setPicture(String value) {
+        picture.uploadFromClasspath("joka.jpg");
+        return this;
+    }
+
+    public RegistrationFormPages setAddress(String value) {
+        address.setValue(value);
+        return this;
+    }
+
+    public RegistrationFormPages checkState(String value) {
+        state.setValue(value).pressEnter();
+        return this;
+    }
+
+    public RegistrationFormPages checkCity(String value) {
+        city.setValue(value).pressEnter();
+        return this;
+    }
+
+    public RegistrationFormPages submitForm() {
+        submit.click();
+        return this;
+    }
+
+    public RegistrationFormPages checkResult(String sample) {
         resultsTableComponent.checkResult(sample);
         return this;
     }

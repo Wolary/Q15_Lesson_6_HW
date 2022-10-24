@@ -31,7 +31,6 @@ public class RegistrationFormPages {
         open("/automation-practice-form");
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
-
         return this;
     }
 
@@ -105,6 +104,4 @@ public class RegistrationFormPages {
         resultsTableComponent.checkResult(sample);
         return this;
     }
-
-
 }

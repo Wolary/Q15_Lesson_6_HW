@@ -5,18 +5,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import quru.qa.pages.RegistrationFormPages;
 
-import static quru.qa.utils.RandomUtils.getRandomPhone;
+import static quru.qa.utils.RandomUtils.*;
 import static quru.qa.utils.RandomUtils.getRandomString;
 
 
 public class FormTestWithPageObjectsWithRandomUtils {
     RegistrationFormPages registrationFormPages = new RegistrationFormPages();
 
-    String firstName = getRandomString(10),
-            lastName = "Ivanov",
-            email = "ivan@ya.ru",
+    String firstName = getRandomString(5),
+            lastName = getRandomStringAbc(8),
+            email = getRandomEmail(),
             gender = "Other",
-            phone = getRandomPhone(10),
+            phone = getRandomPhone(),
             subjects = "arts",
             hobbies = "Reading",
             address = "Russia, Krasnodar, Krasnaya 5",

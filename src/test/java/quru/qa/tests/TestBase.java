@@ -24,3 +24,5 @@ public class TestBase {
         // Configuration.holdBrowserOpen = true;
     }
 }
+
+// тут же можно обьявлять Test Objects
